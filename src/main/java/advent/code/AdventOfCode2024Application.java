@@ -43,15 +43,14 @@ public class AdventOfCode2024Application implements CommandLineRunner {
 		String taskNumber = args[0];
 
 		try {
+			var task = taskMap.get(taskNumber);
 			Resource resource = resourceLoader.getResource("classpath:taskInputs/" + taskNumber + ".txt");
 			List<String> lines = Files.readAllLines(resource.getFile().toPath());
-			List<TwoElementsLine<String, String>> elemetsList = lines.stream().map(line -> {
-				String[] parts = line.trim().split("\\s+");
-				String element1 = parts[0];
-				String element2 = parts[1];
-				return new TwoElementsLine<>(element1, element2);
+			List<List<String>> elemetsList = lines.stream().map(line -> {
+				String[] parts = line.trim().split(task.getSplitRegex());
+				return List.of(parts);
 			}).toList();
-			taskMap.get(taskNumber).calculate(elemetsList);
+			task.calculate(elemetsList);
 		} catch (NumberFormatException | IOException e) {
 			System.err.println("Error processing file: " + e.getMessage());
 		}
