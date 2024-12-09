@@ -2,6 +2,7 @@ package advent.code;
 
 import advent.code.task1.Task1;
 import advent.code.task2.Task2;
+import advent.code.task3.Task3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,14 +27,18 @@ public class AdventOfCode2024Application implements CommandLineRunner {
 	@Autowired
 	private Task2 task2;
 
+	@Autowired
+	private Task3 task3;
+
 	private final Map<String, Task> taskMap;
 
 	@Autowired
-	public AdventOfCode2024Application(Task1 task1, Task2 task2) {
+	public AdventOfCode2024Application(Task1 task1, Task2 task2, Task3 task3) {
 		// Mapping input numbers to corresponding services
 		this.taskMap = Map.of(
 				"1", task1,
-				"2", task2
+				"2", task2,
+				"3", task3
 		);
 	}
 
